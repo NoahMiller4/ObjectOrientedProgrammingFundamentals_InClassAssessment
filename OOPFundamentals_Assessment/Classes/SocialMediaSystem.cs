@@ -60,6 +60,30 @@ namespace ObjectOrientedProgrammingFundamentals_InClassAssessment.Classes
 
         public static Reaction CreateReaction(string type, User creator, Post post)
         {
+            // Check if the creator has already reacted to the post
+            Reaction existingReaction = null;
+
+            foreach (var reaction in creator.Reactions)
+            {
+                if (reaction.Post == post)
+                {
+                    existingReaction = reaction;
+                    break;
+                }
+            }
+
+            if (existingReaction != null)
+            {
+                // If the reaction type is the same, do nothing
+                if (existingReaction.Type == type)
+                    return null;
+
+                // Switch the reaction type
+                existingReaction.Type = type;
+                return existingReaction;
+            }
+
+            // Create a new reaction
             Reaction newReaction = new Reaction(type, creator, post);
             creator.Reactions.Add(newReaction); // Add the reaction to the creator's list of reactions
             _reactions.Add(newReaction);

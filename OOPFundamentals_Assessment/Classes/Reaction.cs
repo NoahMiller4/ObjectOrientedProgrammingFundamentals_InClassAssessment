@@ -9,7 +9,7 @@ namespace ObjectOrientedProgrammingFundamentals_InClassAssessment.Classes
     public class Reaction
     {
 
-        public string Type { get; }
+        public string Type { get; set; }
         public User Creator { get; }
         public Post Post { get; }
 
